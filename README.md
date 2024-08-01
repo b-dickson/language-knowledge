@@ -41,3 +41,17 @@ to use the query response to help answer the original question
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"question": "Who is Albert Einstein?"}' http://127.0.0.1:5000/answer
 ```
+
+
+```
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+
+SELECT ?abstract
+WHERE {
+    res:Albert_Einstein dbo:abstract ?abstract .
+    FILTER (lang(?abstract) = 'en') .
+}
+
+```
