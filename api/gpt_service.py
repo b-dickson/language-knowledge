@@ -13,7 +13,7 @@ def generate_sparql_query(question, feedback=None):
 
     messages = [initial_message, user_message]
 
-    response = openai.ChatCompletion.create(model=MODEL, messages=messages)
+    response = openai.ChatCompletion.create(model=MODEL, messages=messages, temperature=0.0)
     sparql_query = response['choices'][0]['message']['content'].strip()
 
     initial_message = {
@@ -24,7 +24,7 @@ def generate_sparql_query(question, feedback=None):
 
     messages = [initial_message, user_message]
 
-    response = openai.ChatCompletion.create(model=MODEL, messages=messages)
+    response = openai.ChatCompletion.create(model=MODEL, messages=messages, temperature=0.0)
     sparql_query = response['choices'][0]['message']['content'].strip()
 
     return sparql_query
@@ -37,7 +37,7 @@ def interpret_sparql_query(question, response):
         {"role": "user", "content": f'''Original question: {question}, SPARQL query response: {response}'''}
     ]
 
-    respond = openai.ChatCompletion.create(model=MODEL, messages=messages)
+    respond = openai.ChatCompletion.create(model=MODEL, messages=messages, temperature=0.0)
     answer = respond['choices'][0]['message']['content'].strip()
     return answer
 
